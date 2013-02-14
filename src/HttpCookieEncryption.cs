@@ -3,25 +3,15 @@ using System.Web;
 using System.Web.Configuration;
 using System.Security.Cryptography;
 
-using Ensoft.Web.Configuration;
+using System.Web.Security;
 
 namespace System.Web
 {
 	/// <summary>
 	/// Provides methods for Encrypting and Decrypting Cookies.
 	/// </summary>
-#if FRAMEWORK_2_0
 	public static class HttpCookieEncryption
 	{
-#else
-	public /*static*/ class HttpCookieEncryption
-	{
-		// static classes have no constructor
-		private HttpCookieEncryption()
-		{
-		}
-#endif
-
 		/// <summary>
 		/// Decrypts the cookie.
 		/// </summary>

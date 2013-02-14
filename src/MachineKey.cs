@@ -1,9 +1,7 @@
 using System;
-using System.Web;
 using System.Reflection;
 
-//use a more obscure namespace to prevent type name collisions.
-namespace Ensoft.Web.Configuration
+namespace System.Web.Security
 {
 	/// <summary>
 	/// Provides a hook into the current ASP.Net MachineKey parameters.
@@ -16,22 +14,31 @@ namespace Ensoft.Web.Configuration
 
 		static MachineKeyWrapper()
 		{
-			object config = HttpContext.Current.GetConfig("system.web/machineKey");
-			Type configType = config.GetType();
+#if NET10 || NET11
+			//* this whole block hasnt been run tested yet.
 
-			Type machineKeyType = configType.Assembly.GetType("System.Web.Configuration.MachineKey");
+			Assembly systemWebAssembly = Assembly.GetAssembly(typeof(System.Web.HttpApplication));
+			Type machineKeyType = systemWebAssembly.GetType("System.Web.Configuration.MachineKeySection");
+
 			if (machineKeyType == null)
 			{
-				// try to get asp.net 2.0 type
-				machineKeyType = configType.Assembly.GetType("System.Web.Configuration.MachineKeySection");
+				// try to get asp.net pre 2.0 type
+				machineKeyType = systemWebAssembly.GetType("System.Web.Configuration.MachineKey", false);
 			}
 
+			if (machineKeyType == null) throw new InvalidOperationException("Unable to get the core framework type to hook into.");
+			*/
+#else
+			//aspnet 2.0 through 4.5 are using this.
+			Type machineKeyType = typeof(System.Web.Configuration.MachineKeySection);
+#endif
+			
 			BindingFlags bf = BindingFlags.NonPublic | BindingFlags.Static;
 
-			_encOrDecData = machineKeyType.GetMethod("EncryptOrDecryptData", bf);
+			_encOrDecData = machineKeyType.GetMethod("EncryptOrDecryptData", bf, null, new Type[] { typeof(bool), typeof(byte[]), typeof(byte[]), typeof(int), typeof(int) }, new ParameterModifier[] { });
 			_hexStringToByteArray = machineKeyType.GetMethod("HexStringToByteArray", bf);
 			_byteArrayToHexString = machineKeyType.GetMethod("ByteArrayToHexString", bf);
-
+			
 			//is there any way to get some kind of pointer?  or just trust:
 			// MethodBase.Invoke
 			// RuntimeMethodInfo.Invoke
@@ -81,7 +88,6 @@ namespace Ensoft.Web.Configuration
 		public static byte[] EncryptOrDecryptData(bool encrypting, byte[] data, byte[] mod, int index, int length)
 		{
 			return (byte[])_encOrDecData.Invoke(null, new object[] { encrypting, data, mod, index, length });
-			//could do a catch TargetInvocationException and make it disappear...
 		}
 
 	}
