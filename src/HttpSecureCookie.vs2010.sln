@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{07C51070-88B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication20", "WebApplication20\WebApplication20.csproj", "{158FF55C-D492-476D-920D-FDDBC7D54F1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCookieEncryption", "HttpCookieEncryption.csproj", "{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSecureCookie", "HttpSecureCookie.csproj", "{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSecureCookie.Tests", "HttpSecureCookie.Tests\HttpSecureCookie.Tests.csproj", "{C27A039B-088D-4FD9-ABE0-8DE691400AAF}"
 EndProject

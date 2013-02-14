@@ -98,9 +98,9 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HttpCookieEncryption.csproj">
+    <ProjectReference Include="..\HttpSecureCookie.csproj">
       <Project>{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}</Project>
-      <Name>HttpCookieEncryption</Name>
+      <Name>HttpSecureCookie</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

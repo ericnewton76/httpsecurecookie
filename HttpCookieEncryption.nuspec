@@ -1,20 +1,15 @@
-<?xml version="1.0"?>
-<package >
-  <metadata>
-    <id>HttpCookieEncryption</id>
-    <version>1.0.1</version>
-    <authors>Eric Newton</authors>
-    <owners>Eric Newton</owners>
-    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
-    <projectUrl>https://github.com/ericnewton76/httpsecurecookie</projectUrl>
-    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Store encrypted data within encoded cookies for use in server-side implementations without requiring sessions.</description>
-    <releaseNotes>Initial release.</releaseNotes>
-    <copyright>Copyright 2013</copyright>
-    <tags>c# cookie encryption</tags>
-    <!--<dependencies>
-      <dependency id="SampleDependency" version="1.0" />
-    </dependencies>-->
-  </metadata>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>httpsecurecookie</id>
+        <version>0.1.0</version>
+        <authors>Eric Newton</authors>
+        <owners>Eric Newton</owners>
+        <projectUrl>https://github.com/ericnewton76/httpsecurecookie</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Store encrypted data within encoded cookies for use in server-side implementations without requiring sessions.</description>
+        <releaseNotes>Initial release.</releaseNotes>
+        <copyright>Copyright 2013</copyright>
+        <tags>c# cookie encryption</tags>
+    </metadata>
 </package>
