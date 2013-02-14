@@ -6,6 +6,9 @@ Store encrypted data within encoded cookies for use in server-side implementatio
 I originally wrote about the need for encrypted cookies a while back, 2006 to be accurate:
 http://www.codeproject.com/Articles/8742/Encrypting-Cookies-to-prevent-tampering
 
+This library is hosted on NuGet:
+    Install-Package httpsecurecookie
+
 Some sample code to illustrate how easy it is to encrypt:
 
 ```c#
@@ -23,3 +26,4 @@ void Get_CookieValue()
 
 	string protected_And_tamperProof_Value = protected.Value;
 }
+'''
