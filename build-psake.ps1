@@ -1,7 +1,7 @@
 properties { 
   $zipFileName = "HttpSecureCookie.zip"
   $majorVersion = "0.1"
-  $majorWithReleaseVersion = "0.1.0"
+  $majorWithReleaseVersion = "0.1.1"
   $version = GetVersion $majorWithReleaseVersion
   $signAssemblies = $false
   $signKeyPath = "D:\Development\Releases\newtonsoft.snk"
@@ -151,7 +151,10 @@ task NugetPackage -depends Test,UpdateNuspecVersion {
     }
   
     exec { .\_build-tools\NuGet.exe pack "$workingDir\NuGet\HttpSecureCookie.nuspec" -Symbols }
-    move -Path .\*.nupkg -Destination $workingDir\NuGet
+    
+	move -Path .\*.nupkg -Destination $workingDir\NuGet
+	
+	Write-Host -ForegroundColor Magenta "Push nuget package to servers: .\nuget_push $majorWithReleaseVersion"
 }
 
 # Run tests on deployed files
