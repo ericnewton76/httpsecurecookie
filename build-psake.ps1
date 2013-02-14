@@ -1,5 +1,5 @@
 properties { 
-  $zipFileName = "HttpSecureCookieEncryption.zip"
+  $zipFileName = "HttpSecureCookie.zip"
   $majorVersion = "0.1"
   $majorWithReleaseVersion = "0.1.0"
   $version = GetVersion $majorWithReleaseVersion
@@ -17,7 +17,7 @@ properties {
   $docDir = "$baseDir\Doc"
   $workingDir = "$baseDir\_build_output\Working"
   $builds = @(
-	@{Name = "HttpSecureCookieEncryption"; TestsName = "HttpSecureCookieEncryption.Tests"; Constants=""; FinalDir="Net"; NuGetDir = "net"; Framework="net-4.0"; Sign=$false}
+	@{Name = "HttpSecureCookie.vs2010"; TestsName = "HttpSecureCookie.Tests"; Constants=""; FinalDir="Net"; NuGetDir = "net"; Framework="net-4.0"; Sign=$false}
     #@{Name = "Newtonsoft.Json"; TestsName = "Newtonsoft.Json.Tests"; Constants=""; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"; Sign=$true},
     #@{Name = "Newtonsoft.Json.Portable"; TestsName = "Newtonsoft.Json.Tests.Portable"; Constants="PORTABLE"; FinalDir="Portable"; NuGetDir = "portable-net40+sl4+wp7+win8"; Framework="net-4.0"; Sign=$true},
     #@{Name = "Newtonsoft.Json.WinRT"; TestsName = $null; Constants="NETFX_CORE"; FinalDir="WinRT"; NuGetDir = "winrt45"; Framework="net-4.5"; Sign=$true},
@@ -133,7 +133,7 @@ task UpdateNuspecVersion {
 
 task NugetPackage -depends Test,UpdateNuspecVersion {
     New-Item -Path $workingDir\NuGet -ItemType Directory
-    Copy-Item -Path "$baseDir\HttpSecureCookieEncryption.nuspec" -Destination "$workingDir\NuGet\HttpSecureCookieEncryption.nuspec" -recurse
+    Copy-Item -Path "$baseDir\HttpSecureCookie.nuspec" -Destination "$workingDir\NuGet\HttpSecureCookie.nuspec" -recurse
     
     foreach ($build in $builds)
     {
@@ -150,7 +150,7 @@ task NugetPackage -depends Test,UpdateNuspecVersion {
       }
     }
   
-    exec { .\_build-tools\NuGet.exe pack "$workingDir\NuGet\HttpSecureCookieEncryption.nuspec" -Symbols }
+    exec { .\_build-tools\NuGet.exe pack "$workingDir\NuGet\HttpSecureCookie.nuspec" -Symbols }
     move -Path .\*.nupkg -Destination $workingDir\NuGet
 }
 
