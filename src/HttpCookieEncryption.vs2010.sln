@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication20", "WebAppl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpCookieEncryption", "HttpCookieEncryption.csproj", "{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSecureCookie.Tests", "HttpSecureCookie.Tests\HttpSecureCookie.Tests.csproj", "{C27A039B-088D-4FD9-ABE0-8DE691400AAF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{60FB8988-F293-4117-8EEC-12F9B8637AD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,11 +25,16 @@ Global
 		{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C27A039B-088D-4FD9-ABE0-8DE691400AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C27A039B-088D-4FD9-ABE0-8DE691400AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C27A039B-088D-4FD9-ABE0-8DE691400AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C27A039B-088D-4FD9-ABE0-8DE691400AAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{158FF55C-D492-476D-920D-FDDBC7D54F1C} = {07C51070-88B8-42C5-A3BB-4FE803DB018D}
+		{C27A039B-088D-4FD9-ABE0-8DE691400AAF} = {60FB8988-F293-4117-8EEC-12F9B8637AD9}
 	EndGlobalSection
 EndGlobal
