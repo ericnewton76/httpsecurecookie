@@ -1,7 +1,9 @@
 @ECHO OFF
+ECHO.
+ECHO.
 
-setlocal
+REM ensure _Build_Output directory exists
+mkdir _build_output >NUL
 
-set Build_Config=Release
-
-msbuild ..\src\HttpCookieEncryption.csproj /p:Configuration=%Build_Config% /p:outdir=%~dp0\bin\%Build_Config%\
+powershell -Command "& { [Console]::WindowWidth = 150; [Console]::WindowHeight = 50; Start-Transcript -path "./_build_output/lastbuild.log"; Import-Module ".\_build-tools\PSake\tools\psake.psm1"; Invoke-psake .\build-psake.ps1 %*; Stop-Transcript; }"
+pause
