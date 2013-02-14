@@ -10,6 +10,6 @@
         <description>Store encrypted data within encoded cookies for use in server-side implementations without requiring sessions.</description>
         <releaseNotes>Initial release.</releaseNotes>
         <copyright>Copyright 2013</copyright>
-        <tags>c# cookie encryption</tags>
+        <tags>c# cookie httpcookie secure encrypt encrypted encryption</tags>
     </metadata>
 </package>
