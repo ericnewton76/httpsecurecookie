@@ -9,8 +9,6 @@ namespace System.Web.Security
 	public class MachineKeyWrapper
 	{
 		private static MethodInfo _encOrDecData;
-		private static MethodInfo _hexStringToByteArray;
-		private static MethodInfo _byteArrayToHexString;
 
 		static MachineKeyWrapper()
 		{
@@ -36,8 +34,6 @@ namespace System.Web.Security
 			BindingFlags bf = BindingFlags.NonPublic | BindingFlags.Static;
 
 			_encOrDecData = machineKeyType.GetMethod("EncryptOrDecryptData", bf, null, new Type[] { typeof(bool), typeof(byte[]), typeof(byte[]), typeof(int), typeof(int) }, new ParameterModifier[] { });
-			_hexStringToByteArray = machineKeyType.GetMethod("HexStringToByteArray", bf);
-			_byteArrayToHexString = machineKeyType.GetMethod("ByteArrayToHexString", bf);
 			
 			//is there any way to get some kind of pointer?  or just trust:
 			// MethodBase.Invoke
@@ -48,8 +44,6 @@ namespace System.Web.Security
 
 			string exMsg=null;
 			if (_encOrDecData == null) exMsg = (exMsg ?? "") + ",EncryptOrDecryptData";
-			if (_hexStringToByteArray == null) exMsg = (exMsg ?? "") + ",HexStringToByteArray";
-			if (_byteArrayToHexString == null) exMsg = (exMsg ?? "") + ",ByteArrayToHexString";
 			
 			if(exMsg!=null)
 			{
@@ -64,23 +58,50 @@ namespace System.Web.Security
 		// anyways, whatever.
 
 		/// <summary>
-		/// Converts a hex string into a byte array.
+		/// Converts a hex string into a byte array.  Original credit to: http://stackoverflow.com/a/311179/323456
 		/// </summary>
 		/// <param name="str">string to convert</param>
 		/// <returns>byte array</returns>
-		public static byte[] HexStringToByteArray(string str)
+		public static byte[] HexStringToByteArray(string hex)
 		{
-			return (byte[]) _hexStringToByteArray.Invoke(null, new object[] { str });
+			int NumberChars = hex.Length / 2;
+			byte[] bytes = new byte[NumberChars];
+			using (var sr = new System.IO.StringReader(hex))
+			{
+				for (int i = 0; i < NumberChars; i++)
+					bytes[i] =
+					  Convert.ToByte(new string(new char[2] { (char)sr.Read(), (char)sr.Read() }), 16);
+			}
+			return bytes;
 		}
 		/// <summary>
-		/// Converts a byte array into a hex string
+		/// Converts a byte array into a hex string.  Original credit to: http://social.msdn.microsoft.com/Forums/vstudio/en-US/3928b8cb-3703-4672-8ccd-33718148d1e3/byte-array-to-hex-string?forum=csharpgeneral
 		/// </summary>
 		/// <param name="array">array to convert</param>
 		/// <param name="length">length of array to convert</param>
 		/// <returns>hex string representing the byte array.</returns>
-		public static string ByteArrayToHexString(byte[] array, int length)
+		public static string ByteArrayToHexString(byte[] p, int length)
 		{
-			return (string) _byteArrayToHexString.Invoke(null, new object[] { array, length });
+			char[] c = new char[p.Length * 2 + 2];
+
+			byte b;
+
+			c[0] = '0'; c[1] = 'x';
+
+			for (int y = 0, x = 2; y < p.Length; ++y, ++x)
+			{
+
+				b = ((byte)(p[y] >> 4));
+
+				c[x] = (char)(b > 9 ? b + 0x37 : b + 0x30);
+
+				b = ((byte)(p[y] & 0xF));
+
+				c[++x] = (char)(b > 9 ? b + 0x37 : b + 0x30);
+
+			}
+
+			return new string(c);
 		}
 		/// <summary>
 		/// Encrypts and decrypts data using ASP.Net MachineKey configuration settings.
