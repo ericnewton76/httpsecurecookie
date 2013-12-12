@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>httpsecurecookie</id>
-        <version>0.1.1</version>
+        <version>0.1.2</version>
         <authors>Eric Newton</authors>
         <owners>Eric Newton</owners>
         <projectUrl>https://github.com/ericnewton76/httpsecurecookie</projectUrl>
