@@ -46,9 +46,15 @@ namespace System.Web.Security
 			// RuntimeMethodHandle._InvokeFast
 			// ...lot of extra calls...
 
-			if( _encOrDecData==null || _hexStringToByteArray==null || _byteArrayToHexString==null )
+			string exMsg=null;
+			if (_encOrDecData == null) exMsg = (exMsg ?? "") + ",EncryptOrDecryptData";
+			if (_hexStringToByteArray == null) exMsg = (exMsg ?? "") + ",HexStringToByteArray";
+			if (_byteArrayToHexString == null) exMsg = (exMsg ?? "") + ",ByteArrayToHexString";
+			
+			if(exMsg!=null)
 			{
-				throw new InvalidOperationException("Unable to get the methods to invoke.");
+				//Log.Error("Unable to get the methods to invoke: " + exMsg.TrimStart(','));
+				throw new InvalidOperationException("Unable to get the methods to invoke: " + exMsg.TrimStart(','));
 			}
 		}
 
