@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("HttpCookieEncryption")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ericnewton76")]
+[assembly: AssemblyCompany("ericnewton76, Infosys")]
 [assembly: AssemblyProduct("HttpCookieEncryption")]
-[assembly: AssemblyCopyright("Copyright(C) 2012, ericnewton76")]
+[assembly: AssemblyCopyright("Copyright(C) 2012, ericnewton76, 2016, Infosys/keyurpd")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
