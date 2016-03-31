@@ -68,7 +68,7 @@ namespace System.Web.Security
 		/// </summary>
 		/// <param name="str">string to convert</param>
 		/// <returns>byte array</returns>
-        internal static byte[] HexStringToByteArray(string hex)
+        	public static byte[] HexStringToByteArray(string hex)
 		{
 			int NumberChars = hex.Length / 2;
 			byte[] bytes = new byte[NumberChars];
@@ -86,7 +86,7 @@ namespace System.Web.Security
 		/// <param name="array">array to convert</param>
 		/// <param name="length">length of array to convert</param>
 		/// <returns>hex string representing the byte array.</returns>
-        internal static string ByteArrayToHexString(byte[] p, int length)
+        	public static string ByteArrayToHexString(byte[] p, int length)
 		{
 			char[] c = new char[p.Length * 2 + 2];
 
@@ -118,7 +118,7 @@ namespace System.Web.Security
 		/// <param name="index">beginning index</param>
 		/// <param name="length">length of array to operate on</param>
 		/// <returns>encrypted or decrypted byte array</returns>
-        internal static byte[] EncryptOrDecryptData(bool encrypting, byte[] data, byte[] mod, int index, int length)
+        	public static byte[] EncryptOrDecryptData(bool encrypting, byte[] data, byte[] mod, int index, int length)
 		{
 			return (byte[])_encOrDecData.Invoke(null, new object[] { encrypting, data, mod, index, length });
 		}
