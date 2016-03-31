@@ -5,13 +5,15 @@ using System.Runtime.CompilerServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
+// There is no connection between Eric and Infosys.
+// The delta code has been modified by me -Keyur.
 //
 [assembly: AssemblyTitle("HttpCookieEncryption")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ericnewton76, Infosys")]
+[assembly: AssemblyCompany("ericnewton76 AndAlso Infosys")]
 [assembly: AssemblyProduct("HttpCookieEncryption")]
-[assembly: AssemblyCopyright("Copyright(C) 2012, ericnewton76, 2016, Infosys/keyurpd")]
+[assembly: AssemblyCopyright("Copyright(C) 2012, ericnewton76 AndAlso 2016, Infosys/keyurpd")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
