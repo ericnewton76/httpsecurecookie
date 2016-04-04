@@ -1,3 +1,7 @@
+///Edited from original project at https://github.com/ericnewton76/httpsecurecookie
+///Defined new build constants,  NET20 || NET30 || NET35
+///30Mar16, Keyur Desai, Infosys
+
 using System;
 using System.Reflection;
 
@@ -11,7 +15,8 @@ namespace System.Web.Security
 		private static MethodInfo _encOrDecData;
 
 		static MachineKeyWrapper()
-		{
+        {
+#if NET10 || NET11 || NET20 || NET30 || NET35
 #if NET10 || NET11
 			//* this whole block hasnt been run tested yet.
 
@@ -50,7 +55,8 @@ namespace System.Web.Security
 				//Log.Error("Unable to get the methods to invoke: " + exMsg.TrimStart(','));
 				throw new InvalidOperationException("Unable to get the methods to invoke: " + exMsg.TrimStart(','));
 			}
-		}
+#endif
+        }
 
 		// for the record, I feel that this MachineKey class should be public.  Why not have us
 		// think about security only a little bit, and say, "Here... here's some nice helper
@@ -62,7 +68,7 @@ namespace System.Web.Security
 		/// </summary>
 		/// <param name="str">string to convert</param>
 		/// <returns>byte array</returns>
-		public static byte[] HexStringToByteArray(string hex)
+        	public static byte[] HexStringToByteArray(string hex)
 		{
 			int NumberChars = hex.Length / 2;
 			byte[] bytes = new byte[NumberChars];
@@ -80,7 +86,7 @@ namespace System.Web.Security
 		/// <param name="array">array to convert</param>
 		/// <param name="length">length of array to convert</param>
 		/// <returns>hex string representing the byte array.</returns>
-		public static string ByteArrayToHexString(byte[] p, int length)
+        	public static string ByteArrayToHexString(byte[] p, int length)
 		{
 			char[] c = new char[p.Length * 2 + 2];
 
@@ -112,10 +118,48 @@ namespace System.Web.Security
 		/// <param name="index">beginning index</param>
 		/// <param name="length">length of array to operate on</param>
 		/// <returns>encrypted or decrypted byte array</returns>
-		public static byte[] EncryptOrDecryptData(bool encrypting, byte[] data, byte[] mod, int index, int length)
+        	public static byte[] EncryptOrDecryptData(bool encrypting, byte[] data, byte[] mod, int index, int length)
 		{
 			return (byte[])_encOrDecData.Invoke(null, new object[] { encrypting, data, mod, index, length });
 		}
 
+        ///30Mar16 Addedd by Keyur Desai, Infosys, START
+
+        /// <summary>
+        /// Uses .NET 4.0/4.5 API.
+        /// With MachineKeyProtection.Encryption option.
+        /// </summary>
+        /// <param name="input">String to be encrypted.</param>
+        /// <returns>Encrypted string.</returns>
+        internal static string Protect(string input)
+        {
+            byte[] bytesToProtect = System.Text.Encoding.Unicode.GetBytes(input);
+#if NET40
+            return MachineKey.Encode(bytesToProtect, MachineKeyProtection.Encryption);
+#else
+            byte[] protectedBytes = MachineKey.Protect(bytesToProtect);
+            return Convert.ToBase64String(protectedBytes);
+#endif
+        }
+
+        /// <summary>
+        /// Uses .NET 4.0/4.5 API.
+        /// With MachineKeyProtection.Encryption option.
+        /// </summary>
+        /// <param name="input">String to be decrypted.</param>
+        /// <returns>Decrypted string.</returns>
+        internal static string Unprotect(string input)
+        {
+#if NET40
+            byte[] unprotectedBytes = MachineKey.Decode(input, MachineKeyProtection.Encryption);
+            return System.Text.Encoding.Unicode.GetString(unprotectedBytes);
+#else
+            byte[] protectedBytes = Convert.FromBase64String(input);
+            byte[] unprotectedBytes = MachineKey.Unprotect(protectedBytes);
+            return System.Text.Encoding.Unicode.GetString(unprotectedBytes);
+#endif
+        }
+
+        ///30Mar16 Addedd by Keyur Desai, Infosys, END
 	}
 }

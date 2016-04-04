@@ -1,3 +1,7 @@
+///Edited from original project at https://github.com/ericnewton76/httpsecurecookie
+///Defined new build constants,  NET20 || NET30 || NET35
+///30Mar16, Keyur Desai, Infosys
+
 using System;
 using System.Web;
 using System.Web.Configuration;
@@ -25,7 +29,8 @@ namespace System.Web
 			if(cookie.Value.Length==0) return cookie;
 
 			try
-			{
+            {
+#if NET10 || NET11 || NET20 || NET30 || NET35
 				byte[] encrypted = MachineKeyWrapper.HexStringToByteArray(cookie.Value);
 				if (encrypted == null) return null;	// i wonder if this is the most intuitive situation here... the above method will return null if it cant "DeHex" the string...
 				byte[] decrypted = MachineKeyWrapper.EncryptOrDecryptData(false, encrypted, null, 0, encrypted.Length);
@@ -34,8 +39,12 @@ namespace System.Web
 				HttpCookie decryptedCookie = CloneCookie(cookie);
 			
 				decryptedCookie.Value = System.Text.Encoding.Unicode.GetString(decrypted);
-
 				return decryptedCookie;
+#else
+                HttpCookie decryptedCookie = CloneCookie(cookie);
+                decryptedCookie.Value = MachineKeyWrapper.Unprotect(cookie.Value);
+                return decryptedCookie;
+#endif
 			}
 			catch(Exception ex)
 			{
@@ -65,14 +74,20 @@ namespace System.Web
 		public static HttpCookie Encrypt(HttpCookie source)
 		{
 			try
-			{
+            {
+#if NET10 || NET11 || NET20 || NET30 || NET35
 				byte[] data = System.Text.Encoding.Unicode.GetBytes(source.Value);
 				byte[] encData = MachineKeyWrapper.EncryptOrDecryptData(true, data, null, 0, data.Length);
 
 				HttpCookie encrypted = CloneCookie(source);
 				encrypted.Value = MachineKeyWrapper.ByteArrayToHexString(encData, encData.Length);
+                return encrypted;
+#else
+                HttpCookie encrypted = CloneCookie(source);
+                encrypted.Value = MachineKeyWrapper.Protect(source.Value);
+                return encrypted;
+#endif
 
-				return encrypted;
 			} 
 			catch(Exception ex)
 			{

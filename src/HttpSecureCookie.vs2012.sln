@@ -1,13 +1,7 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{07C51070-88B8-42C5-A3BB-4FE803DB018D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication20", "WebApplication20\WebApplication20.csproj", "{158FF55C-D492-476D-920D-FDDBC7D54F1C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSecureCookie", "HttpSecureCookie.csproj", "{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSecureCookie.Tests", "HttpSecureCookie.Tests\HttpSecureCookie.Tests.csproj", "{C27A039B-088D-4FD9-ABE0-8DE691400AAF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{60FB8988-F293-4117-8EEC-12F9B8637AD9}"
 EndProject
@@ -17,6 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E92BB1
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication20", "WebApplication20\WebApplication20.csproj", "{158FF55C-D492-476D-920D-FDDBC7D54F1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSecureCookie", "HttpSecureCookie.csproj", "{094F2FA4-CF7B-4FCE-9532-C279C947BEDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpSecureCookie.Tests", "HttpSecureCookie.Tests\HttpSecureCookie.Tests.csproj", "{C27A039B-088D-4FD9-ABE0-8DE691400AAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
